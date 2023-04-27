@@ -1,0 +1,22 @@
+digraph fake {
+    aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+    bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+    cccccccccccccccccccccccccccccccccccc
+    dddddddddddddddddddddddddddddddddddd
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    ####################################
+    $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    labellabellabellabellabellabellabel
+    pospospospospospospospospospospospos
+    DEN [label="Denver International Airport",pos="39.849312,104.673828,0.0"];
+    DEN [label="Denver International Airport",pos="39.849312"];
+    IAD [label="Washington (Dulles) International Airport",pos="38.9531,77.4565"];
+    ->->->->->->->->->->->->->->->->->->
+    weightweightweightweightweightweight
+    DEN -> DFW [weight=1032] -> DEN -> DFW [weight=1032];
+    DEN -> DFW [weight=];
+    IAH -> DFW [weight=361];
+}
