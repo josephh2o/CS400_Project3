@@ -8,7 +8,7 @@ import java.util.Scanner;
  * This class reads in the data from the .dot file and stores it in a list of airports and a list of paths.
  */
 
-public class AirportDatabaseDW implements AirportDatabaseInterface {
+public class AirportDatabase implements AirportDatabaseInterface {
 
     private List<AirportInterface> airportList = new ArrayList<>(); // List of airports
     private List<PathInterface> pathList = new ArrayList<>(); // List of paths
@@ -51,7 +51,7 @@ public class AirportDatabaseDW implements AirportDatabaseInterface {
                     float longitude = Float.parseFloat(splitData[3].trim());
 
                     // Create airport object
-                    AirportDW airport = new AirportDW(airportCode, airportName, latitude, longitude);
+                    Airport airport = new Airport(airportCode, airportName, latitude, longitude);
                     airportList.add(airport);
                 }
             }

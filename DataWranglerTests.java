@@ -15,7 +15,7 @@ public class DataWranglerTests {
     public void test1() {
 
         // Check for valid airport
-        AirportInterface airport = new AirportDW("DTW", "Detroit Metropolitan Airport",
+        AirportInterface airport = new Airport("DTW", "Detroit Metropolitan Airport",
                 42.2162F, 83.3554F);
         assertEquals("DTW", airport.getAirportCode());
         assertEquals("Detroit Metropolitan Airport", airport.getAirportName());
@@ -41,7 +41,7 @@ public class DataWranglerTests {
      */
     @Test
     public void test3() {
-        AirportDatabaseInterface database = new AirportDatabaseDW();
+        AirportDatabaseInterface database = new AirportDatabase();
         try {
             database.dotReader("data/flightData.dot");
         } catch (Exception e) {
@@ -69,7 +69,7 @@ public class DataWranglerTests {
      */
     @Test
     public void test4() {
-        AirportDatabaseInterface database = new AirportDatabaseDW();
+        AirportDatabaseInterface database = new AirportDatabase();
         try {
             database.dotReader("data/blank.dot");
         } catch (Exception e) {
@@ -84,7 +84,7 @@ public class DataWranglerTests {
      */
     @Test
     public void test5() {
-        AirportDatabaseInterface database = new AirportDatabaseDW();
+        AirportDatabaseInterface database = new AirportDatabase();
         try {
             database.dotReader("data/fake.dot");
         } catch (Exception e) {

@@ -1,7 +1,7 @@
 /**
  * Airport class stores airport data, which includes the airport code, name, latitude, and longitude.
  */
-public class AirportDW implements AirportInterface {
+public class Airport implements AirportInterface {
 
     private String code; // 3-letter code of airport
     private String name; // Name of airport
@@ -15,7 +15,7 @@ public class AirportDW implements AirportInterface {
      * @param latitude latitude of airport
      * @param longitude longitude of airport
      */
-    public AirportDW(String code, String name, float latitude, float longitude) {
+    public Airport(String code, String name, float latitude, float longitude) {
         this.code = code;
         this.name = name;
         this.latitude = latitude;
