@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +14,11 @@ public class AirportPath implements AirportPathInterface {
         // airports = new AirportDatabaseBD();
         airports = new AirportDatabase();
         airportDecoder = new HashMap<String, String>();
-        airports.dotReader("data/flightDataModified.dot");
+        try {
+            airports.dotReader("data/flightDataModified.dot");
+        } catch (FileNotFoundException e) {
+            System.out.print("Error: File not found");
+        }
         loadCodes();
         loadGraph();
     }
