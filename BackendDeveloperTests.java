@@ -12,7 +12,7 @@ public class BackendDeveloperTests {
      */
     @Test
     public void testConstructor() {
-        AirportPath ap = new AirportPath();
+        AirportPath ap = new AirportPath(true);
         // Test Airports loaded correctly
         assertEquals("[alice, bob, charlie]", ap.getAirports().toString());
         // Test Paths loaded correctly
@@ -25,7 +25,7 @@ public class BackendDeveloperTests {
      */
     @Test
     public void testShortestPath() {
-        AirportPath ap = new AirportPath();
+        AirportPath ap = new AirportPath(true);
         // Test that the correct path is gotten from the AE
         assertEquals("[a, c]", ap.getShortestPath("a", "c").toString());
         // Test another path
@@ -40,7 +40,7 @@ public class BackendDeveloperTests {
      */
     @Test
     public void testShortestDistance() {
-        AirportPath ap = new AirportPath();
+        AirportPath ap = new AirportPath(true);
         // Test the correct shortest path is gotten from AE
         assertEquals(5.0, ap.getShortestDistance("a", "c"));
         // Test with another start and end
@@ -53,9 +53,9 @@ public class BackendDeveloperTests {
      */
     @Test
     public void testShortestTrioPath() {
-        AirportPath ap = new AirportPath();
+        AirportPath ap = new AirportPath(true);
         // Test that getShortestTrioPath is called correctly
-        assertEquals(new ArrayList<String>(), ap.getShortestTrioPath("a", "b", "c"));
+        assertThrows(NoSuchElementException.class, () -> ap.getShortestTrioPath("a", "b", "c"));
 
     }
 
@@ -64,7 +64,7 @@ public class BackendDeveloperTests {
     */
     @Test
     public void testGetCode() {
-        AirportPath ap = new AirportPath();
+        AirportPath ap = new AirportPath(true);
         assertEquals("alice", ap.getFullAirportName("a"));
         // Test another pair
         assertEquals("bob", ap.getFullAirportName("b"));

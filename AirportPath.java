@@ -9,7 +9,6 @@ public class AirportPath implements AirportPathInterface {
 	private Map<String, String> airportDecoder;
 
     public AirportPath() {
-        // graph = new AirportPathGraphBD<String, Double>();
         graph = new AirportPathGraph<String, Double>();
         // airports = new AirportDatabaseBD();
         airports = new AirportDatabase();
@@ -22,6 +21,15 @@ public class AirportPath implements AirportPathInterface {
         loadCodes();
         loadGraph();
     }
+
+    public AirportPath(boolean tester) {
+        graph = new AirportPathGraph<String, Double>();
+        airports = new AirportDatabaseBD();
+        airportDecoder = new HashMap<String, String>();
+        loadCodes();
+        loadGraph();
+    }
+
     private void loadCodes() {
         for(AirportInterface airport : airports.getAirportList())
             airportDecoder.put(airport.getAirportCode(), airport.getAirportName());
