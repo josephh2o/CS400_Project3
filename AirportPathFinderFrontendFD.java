@@ -368,7 +368,7 @@ public class AirportPathFinderFrontendFD  extends Application
 	  boolean isOnRoute;
 	  AirportCircle[] nodes; // [0] = from; [1] = to
 	  
-	  static double edgeStrokeWeight = 6;
+	  static double edgeStrokeWeight = 1;
 	  
 	  /**
 	   * sets up formatted edge
@@ -385,7 +385,7 @@ public class AirportPathFinderFrontendFD  extends Application
 	    
 	    setEndX(nodes[1].getLayoutX());
 	    setEndY(nodes[1].getLayoutY());
-	    setStrokeWidth(edgeStrokeWeight);	    
+	    setStrokeWidth(edgeStrokeWeight);
 	  }
 	  
 	  /**
