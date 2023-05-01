@@ -13,6 +13,7 @@ public class AirportPath implements AirportPathInterface {
         // airports = new AirportDatabaseBD();
         airports = new AirportDatabase();
         airportDecoder = new HashMap<String, String>();
+        airports.dotReader("data/flightDataModified.dot");
         loadCodes();
         loadGraph();
     }
