@@ -15,7 +15,7 @@ public class AirportPath implements AirportPathInterface {
         airports = new AirportDatabase();
         airportDecoder = new HashMap<String, String>();
         try {
-            airports.dotReader("data/flightDataModified.dot");
+            airports.dotReader("data/flightDataV2.dot");
         } catch (FileNotFoundException e) {
             System.out.print("Error: File not found");
         }

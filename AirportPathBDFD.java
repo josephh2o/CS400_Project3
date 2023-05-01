@@ -76,13 +76,13 @@ public class AirportPathBDFD implements AirportPathInterface {
   @Override
   public List<AirportInterface> getAirports() { 
     ArrayList<AirportInterface> list = new ArrayList<AirportInterface>();
-    list.add(new AirportFD("MKE", "Milwaukee", (float)43.03, (float)-87.9));
-    list.add(new AirportFD("LAX", "Los Angeles", (float)34.04, (float)-118.25 ));
-    list.add(new AirportFD("HLN", "Helena", (float)46.5, (float)-112.0 ));
+    list.add(new AirportFD("MKE", "Milwaukee", (float)43.03, (float)87.9));
+    list.add(new AirportFD("LAX", "Los Angeles", (float)34.04, (float)118.25 ));
+    list.add(new AirportFD("HLN", "Helena", (float)46.5, (float)112.0 ));
     
-    list.add(new AirportFD("ORF", "Norfolk", (float)37.0, (float)-76.2 ));
-    list.add(new AirportFD("DFW", "Dallas", (float)33.0, (float)-97.0 ));
-    list.add(new AirportFD("EWR", "Newark", (float)40.67, (float)-74.17 ));
+    list.add(new AirportFD("ORF", "Norfolk", (float)37.0, (float)76.2 ));
+    list.add(new AirportFD("DFW", "Dallas", (float)33.0, (float)97.0 ));
+    list.add(new AirportFD("EWR", "Newark", (float)40.67, (float)74.17 ));
     return list;
   }
   

@@ -333,7 +333,7 @@ public class AirportPathFinderFrontendFD  extends Application
       double pix2 = 684;
       
       double slope = (pix2 - pix1)/ (longi2 - longi1);
-      toRet = pix1 + slope*(longitude - longi1);
+      toRet = pix1 + slope*(-1 * longitude - longi1);
       return toRet;
     }
 	
@@ -368,7 +368,7 @@ public class AirportPathFinderFrontendFD  extends Application
 	  boolean isOnRoute;
 	  AirportCircle[] nodes; // [0] = from; [1] = to
 	  
-	  static double edgeStrokeWeight = 6;
+	  static double edgeStrokeWeight = 1;
 	  
 	  /**
 	   * sets up formatted edge
@@ -385,7 +385,7 @@ public class AirportPathFinderFrontendFD  extends Application
 	    
 	    setEndX(nodes[1].getLayoutX());
 	    setEndY(nodes[1].getLayoutY());
-	    setStrokeWidth(edgeStrokeWeight);	    
+	    setStrokeWidth(edgeStrokeWeight);
 	  }
 	  
 	  /**
@@ -466,7 +466,7 @@ public class AirportPathFinderFrontendFD  extends Application
 	    nameBox.setBorder(Border.stroke(Paint.valueOf("black")));
 	    nameBox.setLayoutX(RADIUS+2);
 	    nameBox.setLayoutY(RADIUS-3);
-	    //nameBox.setVisible(false); // TODO if airport names start cluttering, 
+	    nameBox.setVisible(false); // TODO if airport names start cluttering, 
 	                                // just display them on mouse hover (see bottom of constructor)
 	    
 	    mapDot = new Circle(0, 0, RADIUS, unHighlightedColor);
@@ -477,8 +477,9 @@ public class AirportPathFinderFrontendFD  extends Application
 	     
 	    getChildren().addAll(mapDot, nameBox, position);
 	    
-	    //mapDot.setOnMouseEntered(show -> nameBox.setVisible(true));
-	    //mapDot.setOnMouseExited(hide -> nameBox.setVisible(false));
+	    nameBox.setViewOrder(-1);// TODO comment this and below lines
+	    mapDot.setOnMouseEntered(show -> nameBox.setVisible(true)); 
+	    mapDot.setOnMouseExited(hide -> nameBox.setVisible(false));
 	  }
 	  
 	  
