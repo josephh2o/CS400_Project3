@@ -30,7 +30,7 @@ import javafx.scene.text.Text;
 public class AirportPathFinderFrontendFD  extends Application 
                                         implements AirportPathFinderFrontendInterface {
   
-    private AirportPathBDInterface backend;             // deals with generating routes for user
+    private AirportPathInterface backend;             // deals with generating routes for user
     private Scene scene;                    
     private UserInterface userInterface;                // graphical interface root
     private AppState state;      // either in mode-select or route-generating mode

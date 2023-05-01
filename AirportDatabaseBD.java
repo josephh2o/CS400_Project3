@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 public class AirportDatabaseBD implements AirportDatabaseInterface{
@@ -16,8 +17,9 @@ public class AirportDatabaseBD implements AirportDatabaseInterface{
        pathList.add(new PathBD("a", "c", 5));
     }
 
-    private static void dotReader() {// reads all nodes, stores it
-        
+    @Override
+    public void dotReader(String filename) throws FileNotFoundException {
+
     }
 
     public List<AirportInterface> getAirportList() {

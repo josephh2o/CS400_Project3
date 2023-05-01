@@ -2,9 +2,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class AirportPathBDFD implements AirportPathBDInterface {
- 
-  
+public class AirportPathBDFD implements AirportPathInterface {
+
+
+  @Override
+  public boolean insertEdge(String predecessor, String successor, double weight) {
+    return false;
+  }
+
+  @Override
+  public boolean insertNode(String data) {
+    return false;
+  }
+
   @Override
   public List<String> getShortestPath(String start, String end) { 
     ArrayList<String> toRet = new ArrayList<String>();
