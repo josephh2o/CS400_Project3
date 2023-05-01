@@ -11,6 +11,12 @@ ifeq ($(UNAME),Linux)
 	PATH_TO_FX = lib/javafx-sdk-linux-20.0.1/lib
 endif
 
-runProgram:
-	echo $(PATH_TO_FX)
+runProgram: AirportPathFinderAppFD.class
+	java --module-path $(PATH_TO_FX) --add-modules javafx.controls AirportPathFinderAppFD
+
+AirportPathFinderAppFD.class: AirportPathFinderAppFD.java
+	javac --module-path $(PATH_TO_FX) --add-modules javafx.controls AirportPathFinderAppFD.java
+
+clean:
+	rm *.class
 
