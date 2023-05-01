@@ -5,7 +5,7 @@ digraph flightData {
     IAD [label="Washington (Dulles) International Airport",pos="38.9531,77.4565"];
     IAH [label="George Bush Intercontinental Airport",pos="29.9902,95.3368"];
     SLC [label="Salt Lake City International Airport",pos="40.7608,111.8910"];
-    ORD [label="O’Hare International Airport",pos="41.9803,87.9090"];
+    ORD [label="O'Hare International Airport",pos="41.9803,87.9090"];
     SFO [label="San Francisco International Airport",pos="37.6213,122.3790"];
     JFK [label="John F Kennedy Airport",pos="40.6446,73.7858"];
     DTW [label="Detroit Metropolitan Airport",pos="42.2162,83.3554"];
