@@ -333,7 +333,7 @@ public class AirportPathFinderFrontendFD  extends Application
       double pix2 = 684;
       
       double slope = (pix2 - pix1)/ (longi2 - longi1);
-      toRet = pix1 + slope*(longitude - longi1);
+      toRet = pix1 + slope*(-1 * longitude - longi1);
       return toRet;
     }
 	
