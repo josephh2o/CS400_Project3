@@ -1,0 +1,37 @@
+runProgram: AirportPathFinderAppFD.class
+	java --module-path ./lib/javafx-sdk-20.0.1/lib/ --add-modules javafx.controls AirportPathFinderAppFD
+
+
+AirportPathFinderAppFD.class: AirportPathFinderFrontendFD.class AirportPathFinderAppFD.java
+	javac --module-path ./lib/javafx-sdk-20.0.1/lib/ --add-modules javafx.controls AirportPathFinderAppFD.java
+
+AirportPathFinderFrontendFD.class: AirportPathBDInterface.class AirportPathBDFD.class AirportPathFinderFrontendInterface.class AirportPathFinderFrontendFD.java
+	javac --module-path ./lib/javafx-sdk-20.0.1/lib/ --add-modules javafx.controls AirportPathFinderFrontendFD.java
+AirportPathFinderFrontendInterface.class : AirportPathFinderFrontendInterface.java
+	javac --module-path ./lib/javafx-sdk-20.0.1/lib/ --add-modules javafx.controls AirportPathFinderFrontendInterface.java
+
+
+AirportPathBDInterface.class: AirportPathBDInterface.java
+	javac AirportPathBDInterface.java
+AirportPathBDFD.class : PathInterface.class AirportInterface.class PathFD.class AirportFD.class  AirportPathBDInterface.class AirportPathBDFD.java
+	javac AirportPathBDFD.java
+
+
+PathInterface.class : PathInterface.java
+	javac PathInterface.java
+AirportInterface.class : AirportInterface.java
+	javac AirportInterface.java
+PathFD.class : PathInterface.class PathFD.java
+	javac PathFD.java
+AirportFD.class : AirportInterface.class AirportFD.java
+	javac AirportFD.java
+
+runTests: FrontendDeveloperTests.class
+	java --module-path ./lib/javafx-sdk-20.0.1/lib/ --add-modules javafx.controls --add-exports javafx.graphics/com.sun.javafx.application=ALL-UNNAMED -jar lib/junit5.jar -cp .:lib/JavaFXTester.jar -c FrontendDeveloperTests
+
+FrontendDeveloperTests.class : AirportPathFinderFrontendFD.class FrontendDeveloperTests.java
+	javac --module-path lib/javafx-sdk-20.0.1/lib --add-modules javafx.controls -cp .:./lib/junit5.jar:./lib/JavaFXTester.jar FrontendDeveloperTests.java
+
+
+clean:
+	rm *.class
