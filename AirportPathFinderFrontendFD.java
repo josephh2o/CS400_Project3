@@ -42,7 +42,7 @@ public class AirportPathFinderFrontendFD  extends Application
     
     
 	public AirportPathFinderFrontendFD() {
-       this.backend = new AirportPathBDFD();
+       this.backend = new AirportPath();
        userInterface = new UserInterface();
 
        userAirportList = new ArrayList<String>();
@@ -107,6 +107,7 @@ public class AirportPathFinderFrontendFD  extends Application
       // add airports to map
       List<AirportInterface> airportList = backend.getAirports();
       List<PathInterface> pathList = backend.getPaths();
+	  System.out.print(pathList);
       
       for (AirportInterface ap : airportList) {
         airportLookup.put(ap.getAirportCode(), new AirportCircle(ap));
@@ -485,7 +486,7 @@ public class AirportPathFinderFrontendFD  extends Application
 	  /**
        * When true, sets the airport as a user-selected airport that has not yet been confirmed
        * (fills red)
-       * @param setSelected - whether the user has highlighted the airport
+       * @param setHighlight- whether the user has highlighted the airport
        */
 	  void setHighlight(boolean setHighlight) {
 	    isHighlighted = setHighlight;
