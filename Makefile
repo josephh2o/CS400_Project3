@@ -1,6 +1,6 @@
 UNAME := $(shell uname)
 
-ifeq ($(UNAME),Windows)
+ifeq ($(OS),Windows_NT)
 	PATH_TO_FX = lib/javafx-sdk-windows-20.0.1/lib
 endif
 ifeq ($(UNAME),Darwin)
