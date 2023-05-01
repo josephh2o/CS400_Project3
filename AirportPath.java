@@ -11,7 +11,7 @@ public class AirportPath implements AirportPathInterface {
         // graph = new AirportPathGraphBD<String, Double>();
         graph = new AirportPathGraph<String, Double>();
         // airports = new AirportDatabaseBD();
-        airports = new AirportDatabase("data/flightDataModified.dot");
+        airports = new AirportDatabase();
         airportDecoder = new HashMap<String, String>();
         loadCodes();
         loadGraph();
