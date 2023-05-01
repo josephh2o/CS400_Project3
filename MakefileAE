@@ -1,0 +1,12 @@
+
+runTests: AlgorithmEngineerTests.class
+	java -jar junit5.jar -cp . --select-class=AlgorithmEngineerTests
+
+AlgorithmEngineerTests.class: AlgorithmEngineerTests.java AirportPathGraph.class
+	javac -cp .:junit5.jar AlgorithmEngineerTests.java
+
+AirportPathGraph.class: AirportPathGraph.java
+	javac AirportPathGraph.java
+
+clean:
+	rm *.class
