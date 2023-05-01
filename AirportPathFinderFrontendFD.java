@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.NoSuchElementException;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Cursor;
@@ -208,10 +209,20 @@ public class AirportPathFinderFrontendFD  extends Application
           // call Djistkra's method using the list of strings
           // print result to map
           if (airportsInRoute == 2) {
-            drawPath(backend.getShortestPath(userAirportList.get(0), userAirportList.get(1)));
+            try {
+              drawPath(backend.getShortestPath(userAirportList.get(0), userAirportList.get(1)));
+            } catch (NoSuchElementException e) {
+              resetMap();
+              userInterface.getUserRouteText().setText("No route found.");
+            }
           } else if (airportsInRoute == 3) {
+            try {
             drawPath(backend.getShortestTrioPath(
                 userAirportList.get(0), userAirportList.get(1), userAirportList.get(2)));
+            } catch (NoSuchElementException e) {
+              resetMap();
+              userInterface.getUserRouteText().setText("No route found.");
+            }
           }
           
           
