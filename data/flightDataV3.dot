@@ -1,0 +1,18 @@
+digraph flightDataModified {
+    DEN [label="Denver International Airport",pos="39.849312,104.673828"];
+    DFW [label="Dallas/Fort Worth International Airport",pos="32.7079,96.9209"];
+    MCO [label="Orlando International Airport",pos="28.4240,81.3099"];
+    IAD [label="Washington (Dulles) International Airport",pos="38.9531,77.4565"];
+    IAH [label="George Bush Intercontinental Airport",pos="29.9902,95.3368"];
+    SLC [label="Salt Lake City International Airport",pos="40.7608,111.8910"];
+    ORD [label="O’Hare International Airport",pos="41.9803,87.9090"];
+    SFO [label="San Francisco International Airport",pos="37.6213,122.3790"];
+    JFK [label="John F Kennedy Airport",pos="40.6446,73.7858"];
+    DTW [label="Detroit Metropolitan Airport",pos="42.2162,83.3554"];
+    DEN -> DFW [weight=1032];
+    DFW -> ORD [weight=1290];
+    DFW -> JFK [weight=2239];
+    IAD -> DEN [weight=2337];
+    ORD -> SFO [weight=2971];
+    JFK -> IAH [weight=2280];
+}
