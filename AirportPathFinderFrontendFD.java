@@ -107,7 +107,6 @@ public class AirportPathFinderFrontendFD  extends Application
       // add airports to map
       List<AirportInterface> airportList = backend.getAirports();
       List<PathInterface> pathList = backend.getPaths();
-	  System.out.print(pathList);
       
       for (AirportInterface ap : airportList) {
         airportLookup.put(ap.getAirportCode(), new AirportCircle(ap));

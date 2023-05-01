@@ -48,7 +48,7 @@ public class AirportDatabase implements AirportDatabaseInterface {
                     String airportCode = splitData[0].trim();
                     String airportName = splitData[1].trim();
                     float latitude = Float.parseFloat(splitData[2].trim());
-                    float longitude = Float.parseFloat(splitData[3].trim());
+                    float longitude = -1 * Float.parseFloat(splitData[3].trim());
 
                     // Create airport object
                     Airport airport = new Airport(airportCode, airportName, latitude, longitude);
