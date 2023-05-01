@@ -466,7 +466,7 @@ public class AirportPathFinderFrontendFD  extends Application
 	    nameBox.setBorder(Border.stroke(Paint.valueOf("black")));
 	    nameBox.setLayoutX(RADIUS+2);
 	    nameBox.setLayoutY(RADIUS-3);
-	    //nameBox.setVisible(false); // TODO if airport names start cluttering, 
+	    nameBox.setVisible(false); // TODO if airport names start cluttering, 
 	                                // just display them on mouse hover (see bottom of constructor)
 	    
 	    mapDot = new Circle(0, 0, RADIUS, unHighlightedColor);
@@ -477,8 +477,9 @@ public class AirportPathFinderFrontendFD  extends Application
 	     
 	    getChildren().addAll(mapDot, nameBox, position);
 	    
-	    //mapDot.setOnMouseEntered(show -> nameBox.setVisible(true));
-	    //mapDot.setOnMouseExited(hide -> nameBox.setVisible(false));
+	    nameBox.setViewOrder(-1);// TODO comment this and below lines
+	    mapDot.setOnMouseEntered(show -> nameBox.setVisible(true)); 
+	    mapDot.setOnMouseExited(hide -> nameBox.setVisible(false));
 	  }
 	  
 	  
