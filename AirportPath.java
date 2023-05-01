@@ -8,8 +8,10 @@ public class AirportPath implements AirportPathInterface {
 	private Map<String, String> airportDecoder;
 
     public AirportPath() {
-        graph = new AirportPathGraphBD<String, Double>();
-        airports = new AirportDatabaseBD();
+        // graph = new AirportPathGraphBD<String, Double>();
+        graph = new AirportPathGraph<String, Double>();
+        // airports = new AirportDatabaseBD();
+        airports = new AirportDatabase("data/flightDataModified.dot");
         airportDecoder = new HashMap<String, String>();
         loadCodes();
         loadGraph();
