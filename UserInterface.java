@@ -87,6 +87,7 @@ public class UserInterface extends VBox {
     confirmButton = new Button("Confirm");
     confirmButton.setLayoutX(map_width - button_inset_X);
     confirmButton.setLayoutY(map_height - button_inset_Y);
+    confirmButton.setViewOrder(0);
     
     airportGroup.getChildren().add(confirmButton);
     airportGroup.setBackground(Background.fill(Paint.valueOf("lightblue")));
