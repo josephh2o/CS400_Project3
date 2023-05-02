@@ -250,7 +250,7 @@ public class AirportPathFinderFrontendFD  extends Application
     @Override
     public void drawPath(List<String> path) {
       int totalWeight = 0;
-      String userRouteString = "";
+      String userRouteString = "Route: ";
       
       // ----------------------------highlight nodes---------------------------------------
       for (int i=0; i<path.size(); i++) {
@@ -268,7 +268,7 @@ public class AirportPathFinderFrontendFD  extends Application
       }
       
       // ------------------------display additional info-------------------------------------------
-      userInterface.getUserRouteText().setText(userRouteString+"\nTotal: "+totalWeight+ " miles");
+      userInterface.getUserRouteText().setText(userRouteString+"\nDistance: "+totalWeight+ " km");
       
     }
     

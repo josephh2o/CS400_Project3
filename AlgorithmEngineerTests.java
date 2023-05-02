@@ -1,8 +1,8 @@
 
 import org.junit.jupiter.api.Test;
 
+import java.io.FileNotFoundException;
 import java.util.NoSuchElementException;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class AlgorithmEngineerTests {
@@ -71,7 +71,7 @@ public class AlgorithmEngineerTests {
         graph.insertEdge("Houston", "Atlanta", 1.0);
         graph.insertEdge("Boston", "Atlanta", 1.0);
     
-        assertThrows(NoSuchElementException.class, () -> {graph.shortestTrioPathData("Houston", "San Francisco", "Boston");});;
+        assertThrows(NoSuchElementException.class, () -> {graph.shortestTrioPathData("Houston", "San Francisco", "Boston");});
         assertThrows(NoSuchElementException.class, () -> {graph.shortestTrioPathCost("Houston", "San Francisco", "Boston");});
         
     }
@@ -126,7 +126,53 @@ public class AlgorithmEngineerTests {
         
     }
     
+    /*
+    test algorithm engineer code working with backend for finding a path through 3 cities
+     */
+    @Test
+    public void integrationTest1() {
+        AirportPath backend = new AirportPath();
+        assertEquals("[IAD, DEN, DFW, ORD, SFO]", backend.getShortestTrioPath("SFO", "ORD", "IAD").toString());
+        // would test cost but they didn't use my method!
+    }
     
-
-
+    /*
+    test algorithm engineer code working with backend for when the cities don't connect, should throw error
+     */
+    @Test
+    public void integrationTest2() {
+        AirportPath backend = new AirportPath();
+        assertThrows(NoSuchElementException.class, () -> {backend.getShortestTrioPath("SFO", "ORD", "MCO");});
+        // would test cost but they didn't use my method!
+    }
+    
+    /*
+    test getting a path from the database
+     */
+    @Test
+    public void codeReviewOfDWPath() throws FileNotFoundException {
+        AirportDatabase database = new AirportDatabase();
+        database.dotReader("data/flightDataV3.dot");
+        PathInterface denverToDallas = database.getPathList().get(0);
+        assertEquals(1032, denverToDallas.getDistance());
+        assertEquals("DFW", denverToDallas.getEnd());
+        assertEquals("DEN", denverToDallas.getStart());
+    }
+    
+    /*
+    tests getting an airport from the database
+     */
+    @Test
+    public void codeReviewOfDWAirport() throws FileNotFoundException {
+        AirportDatabase database = new AirportDatabase();
+        database.dotReader("data/flightDataV3.dot");
+        AirportInterface denver = database.getAirportList().get(0);
+        assertEquals("DEN", denver.getAirportCode());
+        assertEquals("Denver International Airport", denver.getAirportName());
+        assertTrue(Math.abs(denver.getLatitude()-39.849312) < 1);
+        assertTrue(Math.abs(denver.getLongitude() - 104.673828) < 1);
+        
+    }
+    
+    
 }
