@@ -40,10 +40,10 @@ public class AirportPathFinderFrontendFD  extends Application
     private ArrayList<String> userAirportList; // ordinal list of airport codes created for user
     private HashMap<String, AirportCircle> airportLookup; // hashtable to convert codes to airports
     private HashMap<String,EdgeArrow> edges;    // hashtable to convert strings to edges 
-    
+    private static AirportPathInterface static_backend = new AirportPath();
     
 	public AirportPathFinderFrontendFD() {
-       this.backend = new AirportPath();
+       this.backend = static_backend;
        userInterface = new UserInterface();
 
        userAirportList = new ArrayList<String>();
@@ -56,6 +56,10 @@ public class AirportPathFinderFrontendFD  extends Application
        airportsInRoute = 0;
     }
     
+	
+	public static void setBackend(AirportPathInterface newBackend) {
+	  static_backend = newBackend;
+	}
 	
 	
 	// calls drawMap(). Lets user do the following:
