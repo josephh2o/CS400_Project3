@@ -15,6 +15,8 @@ public class BackendDeveloperTests extends JavaFXTester{
     
     public BackendDeveloperTests() {
         super(AirportPathFinderFrontendFD.class);
+        AirportPath ap = new AirportPath();
+        AirportPathFinderFrontendFD.setBackend(ap);
     }
     /*
      * Tests the constructor of the AirportPath class to make sure that the
@@ -145,7 +147,7 @@ public class BackendDeveloperTests extends JavaFXTester{
         clickOn("#SFO");
         // Do not needto move up again because confirm button already highlighted
         type(KeyCode.ENTER);
-        assertEquals("Route: DEN->DFW->ORD->SFO\nDistance: 5293 km", userRouteText.getText());
+        assertEquals("Route: DEN->DFW->ORD->SFO\nTotal Distance: 5293 km", userRouteText.getText());
         // Test that No route found is printed when no path exists
         clickOn("#choose2");
         clickOn("#SFO");
