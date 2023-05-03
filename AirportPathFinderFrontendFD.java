@@ -117,8 +117,11 @@ public class AirportPathFinderFrontendFD  extends Application
       List<AirportInterface> airportList = backend.getAirports();
       List<PathInterface> pathList = backend.getPaths();
       
+      AirportCircle temp;
       for (AirportInterface ap : airportList) {
-        airportLookup.put(ap.getAirportCode(), new AirportCircle(ap));
+        temp = new AirportCircle(ap);
+        airportLookup.put(ap.getAirportCode(), temp);
+        temp.setViewOrder(UserInterface.baseViewOrder-3);
       }
       
       // add edges to map
@@ -127,6 +130,8 @@ public class AirportPathFinderFrontendFD  extends Application
       }
       userInterface.getAirportGroup().getChildren().addAll(edges.values()); 
       userInterface.getAirportGroup().getChildren().addAll(airportLookup.values());  
+      
+
 	}
 
 	
@@ -237,9 +242,9 @@ public class AirportPathFinderFrontendFD  extends Application
           // go back to main state
           updateState(AppState.MAIN); 
          } else if (numAirports==airportsInRoute-1) {
-           userInterface.getPromptText().setText("Please select an ending airport");
+           userInterface.getPromptText().setText("Please select a final airport");
          } else {
-           userInterface.getPromptText().setText("Please select an intermediate airport");
+           userInterface.getPromptText().setText("Please select another airport");
          }   
       } // else nothing
     }
@@ -317,7 +322,7 @@ public class AirportPathFinderFrontendFD  extends Application
         userInterface.getBackButton().setText("Back to menu");
         // change prompt text
         if (numAirports==0) {
-            userInterface.getPromptText().setText("Please select a starting airport");    
+            userInterface.getPromptText().setText("Please select an airport");    
         }
          
       }  
@@ -513,11 +518,11 @@ public class AirportPathFinderFrontendFD  extends Application
 	    mapDot.setCursor(Cursor.HAND);
 	    mapDot.setOnMouseClicked(colorChange -> getAirportHelper(this));
 	    mapDot.setId(airport.getAirportCode()); // for testing
-	    setViewOrder(UserInterface.baseViewOrder-3);
+	    
 	     
 	    getChildren().addAll(mapDot, nameBox, position);
 	    
-	    nameBox.setViewOrder(UserInterface.baseViewOrder-4);// TODO comment this and below lines
+         // TODO comment out below lines if you want static labels
 	    mapDot.setOnMouseEntered(show -> nameBox.setVisible(true)); 
 	    mapDot.setOnMouseExited(hide -> nameBox.setVisible(false));
 	  }
@@ -579,8 +584,8 @@ public class AirportPathFinderFrontendFD  extends Application
 	 * used to add arrowheads to edges
 	 */
 	 private class Arrowhead extends Path {
-	    static double height = 25; // how long the arrowhead is in px
-	    static double width = 20;// how wide the base of the arrowhead is in px
+	    static double height = 17; // how long the arrowhead is in px
+	    static double width = 17;// how wide the base of the arrowhead is in px
 	    
 	    Arrowhead(double startX, double startY, double endX, double endY) {      
 	      Double angle = Math.atan2((endY - startY), (endX - startX));

@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+
 import javafx.scene.text.Text;
 
 import edu.wisc.cs.cs400.JavaFXTester;
@@ -29,7 +30,7 @@ public class FrontendDeveloperTests extends JavaFXTester {
       clickOn("#choose2");
       
       // make sure it switched states
-      assertEquals("Please select a starting airport", prompt.getText());
+      assertEquals("Please select an airport", prompt.getText());
       
       clickOn("#back");
       
@@ -37,7 +38,7 @@ public class FrontendDeveloperTests extends JavaFXTester {
       assertEquals("Please choose an action", prompt.getText());
       
       clickOn("#choose3");
-      assertEquals("Please select a starting airport", prompt.getText());
+      assertEquals("Please select an airport", prompt.getText());
       
       clickOn("#back");
       
@@ -75,15 +76,15 @@ public class FrontendDeveloperTests extends JavaFXTester {
       Text prompt = lookup("#prompt").query();
       
       clickOn("#choose3");
-      assertEquals("Please select a starting airport", prompt.getText());
+      assertEquals("Please select an airport", prompt.getText());
       
       clickOn("#LAX");
       clickOn("#confirm");
-      assertEquals("Please select an intermediate airport", prompt.getText());
+      assertEquals("Please select another airport", prompt.getText());
       
       clickOn("#MKE");
       clickOn("#confirm");
-      assertEquals("Please select an ending airport", prompt.getText());
+      assertEquals("Please select a final airport", prompt.getText());
       
       clickOn("#EWR");
       clickOn("#confirm");
@@ -103,15 +104,15 @@ public class FrontendDeveloperTests extends JavaFXTester {
       Text prompt = lookup("#prompt").query();
       
       clickOn("#choose3");
-      assertEquals("Please select a starting airport", prompt.getText());
+      assertEquals("Please select an airport", prompt.getText());
       
       clickOn("#LAX");
       clickOn("#confirm");
-      assertEquals("Please select an intermediate airport", prompt.getText());
+      assertEquals("Please select another airport", prompt.getText());
       
       clickOn("#MKE");
       clickOn("#confirm");
-      assertEquals("Please select an ending airport", prompt.getText());
+      assertEquals("Please select a final airport", prompt.getText());
       
       clickOn("#back");
       
