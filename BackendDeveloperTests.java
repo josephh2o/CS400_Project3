@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import javafx.scene.text.Text;
 import javafx.scene.control.Button;
 import javafx.concurrent.Task;
+import javafx.scene.input.KeyCode;
 import edu.wisc.cs.cs400.JavaFXTester;
 
 public class BackendDeveloperTests extends JavaFXTester{
@@ -68,7 +69,7 @@ public class BackendDeveloperTests extends JavaFXTester{
 
     }
 
-    /* Test that the key value pairs in the hashmap for the abbriviations
+    /* Test that the key value pairs in the hashmap for the abbreviations 
     * is correct
     */
     @Test
@@ -81,17 +82,26 @@ public class BackendDeveloperTests extends JavaFXTester{
         assertEquals("charlie", ap.getFullAirportName("c"));
     }
 
+    /*
+     * Integration test to check that airports are being loaded from the Data
+     * Wranglers correctly.
+     */
     @Test
     public void testloadDataIntegration() {
         AirportPath ap = new AirportPath();
         assertEquals(10, ap.getAirports().size());
         assertEquals(6, ap.getPaths().size());
+        // Array of expected airports
         String[] airports = new String[] {"DEN", "DFW", "MCO", "IAD", "IAH", "SLC", "ORD", "SFO", "JFK", "DTW"};
         for(int i = 0; i < ap.getAirports().size(); i++) {
             assertEquals(airports[i], ap.getAirports().get(i).getAirportCode());
         }
     }
 
+    /*
+     * Integration test to check that the shortest path is gotten from the
+     * Algorithm Engineer between two Airports.
+     */
     @Test
     public void testShortestPathIntegration() {
         AirportPath ap = new AirportPath();
@@ -101,37 +111,50 @@ public class BackendDeveloperTests extends JavaFXTester{
         assertThrows(NoSuchElementException.class, () -> ap.getShortestPath("SFO", "JFK"));
     }
 
+
+    /**
+     * Code review test to check that the user is not able to choose the same
+     * point twice when choosing endpoints for the traversal.
+     */
     @Test
-    public void testChoose2ReviewOfFrontendDeveloper() {
+    public void testPickSameCodeReviewOfFrontendDeveloper() {
         Text userRouteText = lookup("#userRouteText").query();
-        try {
-          clickOn("#choose2");
-          // Thread.sleep(2000);
-          clickOn("#DEN");
-          // Thread.sleep(2000);
-          clickOn("#confirm");
-          // Thread.sleep(2000);
-          clickOn("#SFO");
-          // Thread.sleep(2000);
-          clickOn("#confirm");
-          // Thread.sleep(2000);
-        } catch(Exception e) {
-            assertEquals(1, 0);
-        }
-
-        // clickOn("#choose2");
-        // clickOn("#DEN");
-        // clickOn("#confirm");
-        // clickOn("#SFO");
-        // clickOn("#confirm");
-        // clickOn("#confirm");
-
-        assertEquals("DEN->DFW->ORD->SFO\nDistance: 5293 km", userRouteText.getText());
+        clickOn("#choose2");
+        clickOn("#DEN");
+        type(KeyCode.UP);
+        type(KeyCode.ENTER);
+        // Select the same airport again
+        clickOn("#DEN");
+        assertEquals("", userRouteText.getText());
         clickOn("#back");
     }
 
+    /**
+     * Test that the correct Route is printed when a path between two airports
+     * exists and prints no route found when no path exists.
+     */
     @Test
-    public void testCodeReviewOfFrontendDeveloper() {
-
+    public void testChoose2ReviewOfFrontendDeveloper() {
+        // Test that shortest path is gotten when one exists
+        Text userRouteText = lookup("#userRouteText").query();
+        clickOn("#choose2");
+        clickOn("#DEN");
+        // Move to the confirm button
+        type(KeyCode.UP);
+        type(KeyCode.ENTER);
+        clickOn("#SFO");
+        // Do not needto move up again because confirm button already highlighted
+        type(KeyCode.ENTER);
+        assertEquals("Route: DEN->DFW->ORD->SFO\nDistance: 5293 km", userRouteText.getText());
+        // Test that No route found is printed when no path exists
+        clickOn("#choose2");
+        clickOn("#SFO");
+        // Move to the confirm button
+        type(KeyCode.UP);
+        type(KeyCode.ENTER);
+        clickOn("#DEN");
+        // Do not need to move up again because confirm button already highlighted
+        type(KeyCode.ENTER);
+        assertEquals("No route found.", userRouteText.getText());
     }
 }
