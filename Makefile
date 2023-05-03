@@ -14,10 +14,10 @@ endif
 runProgram: AirportPathFinderAppFD.class
 	java --module-path $(PATH_TO_FX) --add-modules javafx.controls AirportPathFinderAppFD
 
-AirportPathFinderAppFD.class: AirportPathFinderAppFD.java AirportPath.class
+AirportPathFinderAppFD.class: AirportPathFinderAppFD.java AirportPath.class AirportPathFinderFrontendFD.class
 	javac --module-path $(PATH_TO_FX) --add-modules javafx.controls AirportPathFinderAppFD.java
 
-AirportPathFinderFrontendFD.class: AirportPathBDInterface.class AirportPath.class AirportPathFinderFrontendInterface.class AirportPathFinderFrontendFD.java
+AirportPathFinderFrontendFD.class: AirportPathInterface.class AirportPath.class AirportPathFinderFrontendInterface.class AirportPathFinderFrontendFD.java
 	javac --module-path $(PATH_TO_FX) --add-modules javafx.controls AirportPathFinderFrontendFD.java
 
 AirportPath.class : PathInterface.class AirportInterface.class PathDW.class Airport.class  AirportPathInterface.class AirportPath.java AirportDatabase.class AirportPathGraph.class
