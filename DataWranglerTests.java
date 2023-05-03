@@ -33,7 +33,7 @@ public class DataWranglerTests {
     public void test2() {
 
         // Check for valid path
-        PathInterface path = new PathDW("DEN", "DFW", 1032);
+        PathInterface path = new Path("DEN", "DFW", 1032);
         assertEquals("DEN", path.getStart());
         assertEquals("DFW", path.getEnd());
         assertEquals(1032, path.getDistance());

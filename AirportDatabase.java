@@ -73,7 +73,7 @@ public class AirportDatabase implements AirportDatabaseInterface {
                     int distance = Integer.parseInt(splitData[2].trim());
 
                     // Create path object
-                    PathDW path = new PathDW(start, end, distance);
+                    Path path = new Path(start, end, distance);
                     pathList.add(path);
                 }
             }
