@@ -25,10 +25,11 @@ import javafx.scene.text.Text;
  */
 public class UserInterface extends VBox {
 
-  private static final double buttonHeight = 50;
-  private static final double buttonWidth = 70;
+  private static final double buttonHeight = 50; // px
+  private static final double buttonWidth = 70; // px
   private static double button_inset_X = 130; // px
   private static double button_inset_Y = 50; //px
+  public static double baseViewOrder = 6;
   
   
   private ArrayList<Button> modeSelects; // select 2 airports or select 3 airports buttons
@@ -80,7 +81,7 @@ public class UserInterface extends VBox {
     double map_height = mapUS.getHeight();
     ImageView mapIV = new ImageView();
     mapIV.setImage(mapUS);
-    mapIV.setViewOrder(5);
+    mapIV.setViewOrder(baseViewOrder);
     airportGroup.getChildren().add(mapIV);
     
 

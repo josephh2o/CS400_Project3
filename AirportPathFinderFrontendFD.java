@@ -401,6 +401,7 @@ public class AirportPathFinderFrontendFD  extends Application
 	    setEndX(nodes[1].getLayoutX());
 	    setEndY(nodes[1].getLayoutY());
 	    setStrokeWidth(edgeStrokeWeight);
+	    setViewOrder(UserInterface.baseViewOrder-1);
 	  }
 	  
 	  /**
@@ -411,11 +412,11 @@ public class AirportPathFinderFrontendFD  extends Application
 	  void setOnRoute(boolean setOnRoute) {
 	    isOnRoute = setOnRoute;
 	    if (isOnRoute) {
-	      setViewOrder(1);
+	      setViewOrder(UserInterface.baseViewOrder-2);
 	      setStroke(Paint.valueOf("gold"));
 	    }
 	    else {
-	      setViewOrder(2);
+	      setViewOrder(UserInterface.baseViewOrder-1);
 	      setStroke(Paint.valueOf("black"));
 	    }
 	  }
@@ -488,11 +489,11 @@ public class AirportPathFinderFrontendFD  extends Application
 	    mapDot.setCursor(Cursor.HAND);
 	    mapDot.setOnMouseClicked(colorChange -> getAirportHelper(this));
 	    mapDot.setId(airport.getAirportCode()); // for testing
-	    setViewOrder(0);
+	    setViewOrder(UserInterface.baseViewOrder-3);
 	     
 	    getChildren().addAll(mapDot, nameBox, position);
 	    
-	    nameBox.setViewOrder(-1);// TODO comment this and below lines
+	    nameBox.setViewOrder(UserInterface.baseViewOrder-4);// TODO comment this and below lines
 	    mapDot.setOnMouseEntered(show -> nameBox.setVisible(true)); 
 	    mapDot.setOnMouseExited(hide -> nameBox.setVisible(false));
 	  }
