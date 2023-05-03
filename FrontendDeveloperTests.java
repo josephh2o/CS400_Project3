@@ -60,7 +60,7 @@ public class FrontendDeveloperTests extends JavaFXTester {
       clickOn("#MKE");
       clickOn("#confirm");
          
-      assertEquals("LAX->MKE\nTotal: 10 miles", userRouteText.getText()); 
+      assertEquals("Route: LAX->MKE\nTotal Distance: 10 km", userRouteText.getText()); 
       clickOn("#back");
     }
     
@@ -89,7 +89,7 @@ public class FrontendDeveloperTests extends JavaFXTester {
       clickOn("#confirm");
       
       assertEquals("Please choose an action", prompt.getText());   
-      assertEquals("LAX->MKE->ORF->EWR\nTotal: 17 miles", userRouteText.getText());
+      assertEquals("Route: LAX->MKE->ORF->EWR\nTotal Distance: 17 km", userRouteText.getText());
       clickOn("#back");
     }
     
@@ -138,7 +138,7 @@ Text userRouteText = lookup("#userRouteText").query();
       clickOn("#HLN");
       clickOn("#confirm");
          
-      assertEquals("MKE->HLN\nTotal: 3 miles", userRouteText.getText()); 
+      assertEquals("Route: MKE->HLN\nTotal Distance: 3 km", userRouteText.getText()); 
       // now clear map
       clickOn("#back");
       assertEquals("", userRouteText.getText());
@@ -159,7 +159,7 @@ Text userRouteText = lookup("#userRouteText").query();
       clickOn("#confirm");
       clickOn("#HLN");
       clickOn("#confirm");
-      assertEquals("MKE->HLN\nTotal: 3 miles", userRouteText.getText());
+      assertEquals("Route: MKE->HLN\nTotal Distance: 3 km", userRouteText.getText());
       
       // now do a new route
       clickOn("#choose3");
@@ -169,7 +169,7 @@ Text userRouteText = lookup("#userRouteText").query();
       clickOn("#confirm");
       clickOn("#ORF");
       clickOn("#confirm");
-      assertEquals("LAX->DFW->ORF\nTotal: 12 miles", userRouteText.getText());
+      assertEquals("Route: LAX->DFW->ORF\nTotal Distance: 12 km", userRouteText.getText());
       clickOn("#back");
     }
 

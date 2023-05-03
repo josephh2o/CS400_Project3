@@ -40,7 +40,7 @@ public class AirportPathFinderFrontendFD  extends Application
     private ArrayList<String> userAirportList; // ordinal list of airport codes created for user
     private HashMap<String, AirportCircle> airportLookup; // hashtable to convert codes to airports
     private HashMap<String,EdgeArrow> edges;    // hashtable to convert strings to edges 
-    private static AirportPathInterface static_backend = new AirportPath();
+    private static AirportPathInterface static_backend = new AirportPathBDFD();
     
 	public AirportPathFinderFrontendFD() {
        this.backend = static_backend;
@@ -268,7 +268,7 @@ public class AirportPathFinderFrontendFD  extends Application
       }
       
       // ------------------------display additional info-------------------------------------------
-      userInterface.getUserRouteText().setText(userRouteString+"\nDistance: "+totalWeight+ " km");
+      userInterface.getUserRouteText().setText(userRouteString+"\nTotal Distance: "+totalWeight+ " km");
       
     }
     
