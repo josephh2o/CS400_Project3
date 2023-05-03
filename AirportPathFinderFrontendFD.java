@@ -18,7 +18,11 @@ import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
-
+import javafx.scene.shape.Path;
+import javafx.scene.shape.ClosePath;
+import javafx.scene.shape.LineTo;
+import javafx.scene.shape.MoveTo;
+import java.lang.Math;
 
 /**
  * This defines an application that allows the user to
@@ -377,8 +381,10 @@ public class AirportPathFinderFrontendFD  extends Application
 	 * @author Cameron
 	 *
 	 */
-	private class EdgeArrow extends Line {
+	private class EdgeArrow extends Pane {
 	  PathInterface path;
+	  Arrowhead head;
+	  Line line;
 
 	  boolean isOnRoute;
 	  AirportCircle[] nodes; // [0] = from; [1] = to
@@ -392,15 +398,26 @@ public class AirportPathFinderFrontendFD  extends Application
 	  EdgeArrow(PathInterface path) {
 	    this.path = path;
 	    this.isOnRoute = false;
+
+	    
 	    nodes = new AirportCircle[2];
 	    nodes[0] = airportLookup.get(path.getStart());
 	    nodes[1] = airportLookup.get(path.getEnd());
-	    setStartX(nodes[0].getLayoutX());
-	    setStartY(nodes[0].getLayoutY());
+	    double startX = nodes[0].getLayoutX();
+	    double startY = nodes[0].getLayoutY();
+	    double endX = nodes[1].getLayoutX();
+	    double endY = nodes[1].getLayoutY();
+	    line = new Line();
+	    line.setStartX(startX);
+	    line.setStartY(startY);
 	    
-	    setEndX(nodes[1].getLayoutX());
-	    setEndY(nodes[1].getLayoutY());
-	    setStrokeWidth(edgeStrokeWeight);
+	    line.setEndX(endX);
+	    line.setEndY(endY);
+	    line.setStrokeWidth(edgeStrokeWeight);
+	    getChildren().add(line);
+	    head = new Arrowhead(startX, startY, endX, endY);
+	    getChildren().add(head);
+	    
 	    setViewOrder(UserInterface.baseViewOrder-1);
 	  }
 	  
@@ -413,11 +430,11 @@ public class AirportPathFinderFrontendFD  extends Application
 	    isOnRoute = setOnRoute;
 	    if (isOnRoute) {
 	      setViewOrder(UserInterface.baseViewOrder-2);
-	      setStroke(Paint.valueOf("gold"));
+	      setColor(Paint.valueOf("gold"));
 	    }
 	    else {
 	      setViewOrder(UserInterface.baseViewOrder-1);
-	      setStroke(Paint.valueOf("black"));
+	      setColor(Paint.valueOf("black"));
 	    }
 	  }
 	  
@@ -427,7 +444,14 @@ public class AirportPathFinderFrontendFD  extends Application
 	   */
 	  int getWeight() { return path.getDistance(); }
 	  
-	  
+	 
+	  /**
+	   * sets color of edge + arrowhead
+	   */
+	  void setColor(Paint strokeColor) {
+	    line.setStroke(strokeColor);
+	    head.setFill(strokeColor);
+	  }
 	}
 	
 	
@@ -549,6 +573,37 @@ public class AirportPathFinderFrontendFD  extends Application
 	  MAIN, AIRPORT_SELECTION
 	}
 	
+	
+	
+	/**
+	 * used to add arrowheads to edges
+	 */
+	 private class Arrowhead extends Path {
+	    static double height = 25; // how long the arrowhead is in px
+	    static double width = 20;// how wide the base of the arrowhead is in px
+	    
+	    Arrowhead(double startX, double startY, double endX, double endY) {      
+	      Double angle = Math.atan2((endY - startY), (endX - startX));
+	      double beginX = endX - AirportCircle.RADIUS*Math.cos(angle);
+	      double beginY = endY - AirportCircle.RADIUS*Math.sin(angle);
+	      double x2 = beginX - height*Math.cos(angle);
+	      double y2 = beginY - height*Math.sin(angle);
+	      
+	      double x1 = x2 + (width/2)*Math.sin(angle);
+	      double y1 = y2 - (width/2)*Math.cos(angle);
+	      
+	      double x3 = x2 - (width/2)*Math.sin(angle);
+	      double y3 = y2 + (width/2)*Math.cos(angle);
+	      
+	      getElements().add(new MoveTo(beginX, beginY));
+	      getElements().add(new LineTo(x1, y1));
+	      getElements().add(new LineTo(x3, y3));
+	      getElements().add(new LineTo(endX, endY));
+	      getElements().add(new ClosePath());
+	      setStrokeWidth(0);
+	      setFill(Paint.valueOf("black")); 
+	    }
+	 }
 	
 	
 	
