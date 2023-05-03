@@ -23,6 +23,7 @@ import javafx.scene.shape.ClosePath;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
 import java.lang.Math;
+import javafx.stage.Modality;
 
 /**
  * This defines an application that allows the user to
@@ -44,10 +45,12 @@ public class AirportPathFinderFrontendFD  extends Application
     private ArrayList<String> userAirportList; // ordinal list of airport codes created for user
     private HashMap<String, AirportCircle> airportLookup; // hashtable to convert codes to airports
     private HashMap<String,EdgeArrow> edges;    // hashtable to convert strings to edges 
-    private static AirportPathInterface static_backend = new AirportPathBDFD();
+    
+    //private static AirportPathInterface static_backend = new AirportPathBDFD();
     
 	public AirportPathFinderFrontendFD() {
-       this.backend = static_backend;
+	  
+       //this.backend = static_backend;
        userInterface = new UserInterface();
 
        userAirportList = new ArrayList<String>();
@@ -61,9 +64,9 @@ public class AirportPathFinderFrontendFD  extends Application
     }
     
 	
-	public static void setBackend(AirportPathInterface newBackend) {
-	  static_backend = newBackend;
-	}
+//	public static void setBackend(AirportPathInterface newBackend) {
+//	  static_backend = newBackend;
+//	}
 	
 	
 	// calls drawMap(). Lets user do the following:
@@ -77,6 +80,18 @@ public class AirportPathFinderFrontendFD  extends Application
    */
 	@Override
 	public void start(final Stage stage) {
+	  
+	  StartupUI startup = new StartupUI();
+      startup.getYesButton().setId("yes");
+      startup.getNoButton().setId("no");
+	   
+	  startup.showAndWait();
+	  if ( startup.useTesterData() ) {
+	    backend = new AirportPathBDFD();
+	  } else {
+	    backend = new AirportPath();
+	  }
+	  
 	  // set up call-backs for buttons
 	  userInterface.getBackButton().setOnAction(backToMenu -> backHelper() );      
       userInterface.getConfirmButton().setOnAction(btclick -> confirmHelper());
