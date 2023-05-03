@@ -1,5 +1,7 @@
 import org.junit.jupiter.api.Test;
 
+import java.util.NoSuchElementException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -9,7 +11,8 @@ import static org.junit.jupiter.api.Assertions.*;
 public class DataWranglerTests {
 
     /**
-     * Tests the Airport class. Specifically ensures that the constructor and getters work as intended.
+     * Tests the Airport class. Specifically ensures that the constructor and getters work as
+     * intended.
      */
     @Test
     public void test1() {
@@ -24,7 +27,8 @@ public class DataWranglerTests {
     }
 
     /**
-     * Tests the Path class. Specifically ensures that the constructor and getters work as intended.
+     * Tests the Path class. Specifically ensures that the constructor and getters work
+     * as intended.
      */
     @Test
     public void test2() {
@@ -97,8 +101,8 @@ public class DataWranglerTests {
 
         // Check if airport data is correct
         assertEquals("IAD", database.getAirportList().get(0).getAirportCode());
-        assertEquals("Washington (Dulles) International Airport", database.getAirportList().
-                get(0).getAirportName());
+        assertEquals("Washington (Dulles) International Airport",
+                database.getAirportList().get(0).getAirportName());
         assertEquals(38.9531F, database.getAirportList().get(0).getLatitude());
         assertEquals(77.4565F, database.getAirportList().get(0).getLongitude());
 
@@ -106,5 +110,69 @@ public class DataWranglerTests {
         assertEquals("IAH", database.getPathList().get(0).getStart());
         assertEquals("DFW", database.getPathList().get(0).getEnd());
         assertEquals(361, database.getPathList().get(0).getDistance());
+    }
+
+    /**
+     * This JUnit 5 test checks the functionality when integrated with the Backend Developer
+     * classes
+     */
+    @Test
+    public void testIntegration1() {
+
+    }
+
+    /**
+     * This JUnit 5 test checks the functionality when integrated with the Backend Developer
+     * classes
+     */
+    @Test
+    public void testIntegration2() {
+
+    }
+
+    /**
+     * This JUnit 5 test checks the functionality of the AirportPathGraph class written by the
+     * Algorithm Engineer.
+     */
+    @Test
+    public void testCodeReviewOfAlgorithmEngineer1() {
+        AirportPathGraph<String, Double> graph = new AirportPathGraph<>();
+        graph.insertNode("DEN");
+        graph.insertNode("DFW");
+        graph.insertNode("MCO");
+        graph.insertNode("IAD");
+        graph.insertNode("IAH");
+        graph.insertEdge("DEN", "DFW", 1.0);
+        graph.insertEdge("DFW", "DEN", 2.0);
+        graph.insertEdge("DFW", "MCO", 1.0);
+        graph.insertEdge("MCO", "DEN", 2.0);
+        graph.insertEdge("MCO", "IAD", 1.0);
+        graph.insertEdge("IAD", "MCO", 2.0);
+        graph.insertEdge("IAD", "IAH", 1.0);
+        graph.insertEdge("IAH", "IAD", 2.0);
+        graph.insertEdge("DEN", "IAD", 7.0);
+
+        // Check if the shortest path of the graph is correct
+        assertEquals("[DEN, DFW, MCO, IAD, IAH]",
+                graph.shortestTrioPathData("DEN", "MCO", "IAH").toString());
+    }
+    /**
+     * This JUnit 5 test checks the functionality of the AirportPathGraph class written by the
+     * Algorithm Engineer.
+     */
+    @Test
+    public void testCodeReviewOfAlgorithmEngineer2() {
+        AirportPathGraph<String, Double> graph = new AirportPathGraph<>();
+        graph.insertNode("DEN");
+        graph.insertNode("DFW");
+        graph.insertNode("MCO");
+        graph.insertNode("IAD");
+        graph.insertNode("IAH");
+        graph.insertEdge("DEN", "DFW", 1.0);
+        graph.insertEdge("MCO", "IAH", 2.0);
+
+        // If the desired nodes of the graph are not connected, NoSuchElementException is thrown
+        assertThrows(NoSuchElementException.class, () -> {
+            graph.shortestTrioPathData("DEN", "MCO", "IAH");});
     }
 }
