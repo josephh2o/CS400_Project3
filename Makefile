@@ -14,10 +14,10 @@ endif
 runProgram: AirportPathFinderAppFD.class
 	java --module-path $(PATH_TO_FX) --add-modules javafx.controls AirportPathFinderAppFD
 
-AirportPathFinderAppFD.class: AirportPathFinderAppFD.java AirportPath.class
+AirportPathFinderAppFD.class: AirportPathFinderAppFD.java AirportPath.class AirportPathFinderFrontendFD.class
 	javac --module-path $(PATH_TO_FX) --add-modules javafx.controls AirportPathFinderAppFD.java
 
-AirportPathFinderFrontendFD.class: AirportPathBDInterface.class AirportPath.class AirportPathFinderFrontendInterface.class AirportPathFinderFrontendFD.java
+AirportPathFinderFrontendFD.class: AirportPathInterface.class AirportPath.class AirportPathFinderFrontendInterface.class AirportPathFinderFrontendFD.java
 	javac --module-path $(PATH_TO_FX) --add-modules javafx.controls AirportPathFinderFrontendFD.java
 
 AirportPath.class : PathInterface.class AirportInterface.class PathDW.class Airport.class  AirportPathInterface.class AirportPath.java AirportDatabase.class AirportPathGraph.class
@@ -47,16 +47,16 @@ AirportInterface.class : AirportInterface.java
 AirportPathGraph.class: AirportPathGraph.java
 	javac AirportPathGraph.java
 
-runTests: runTestsAE runTestsDW runTestsBD runTestsFD
+runTests: runAlgorithmEngineerTests runDataWranglerTests runBackendDeveloperTests runFrontendDeveloperTests
 
-runTestsAE: #AlgorithmEngineerTests.class
+runAlgorithmEngineerTests: #AlgorithmEngineerTests.class
 	javac -cp .:lib/junit5.jar AlgorithmEngineerTests.java
 	java -jar lib/junit5.jar -cp . --select-class=AlgorithmEngineerTests
 
 # AlgorithmEngineerTests.class: AlgorithmEngineerTests.java AirportPathGraph.class
 	# javac -cp .:lib/junit5.jar AlgorithmEngineerTests.java
 
-runTestsDW: #DataWranglerTests.class
+runDataWranglerTests: #DataWranglerTests.class
 	javac -cp .:lib/junit5.jar DataWranglerTests.java
 	java -jar lib/junit5.jar -cp . --select-class=DataWranglerTests
 
@@ -65,11 +65,11 @@ runTestsDW: #DataWranglerTests.class
 
 DataWranglerTests.java: AirportDatabaseDW.class
 
-runTestsBD: #BackendDeveloperTests.class
-	javac -cp .:lib/junit5.jar BackendDeveloperTests.java
-	java -jar lib/junit5.jar -cp . --select-class=BackendDeveloperTests
+runBackendDeveloperTests: #BackendDeveloperTests.class
+	javac --module-path $(PATH_TO_FX) --add-modules javafx.controls -cp .:lib/junit5.jar:./lib/JavaFXTester.jar BackendDeveloperTests.java
+	java --module-path $(PATH_TO_FX) --add-modules javafx.controls --add-exports javafx.graphics/com.sun.javafx.application=ALL-UNNAMED -jar lib/junit5.jar -cp .:lib/JavaFXTester.jar --select-class=BackendDeveloperTests
 
-runTestsFD: #FrontendDeveloperTests.class
+runFrontendDeveloperTests: #FrontendDeveloperTests.class
 	javac --module-path $(PATH_TO_FX) --add-modules javafx.controls -cp .:./lib/junit5.jar:./lib/JavaFXTester.jar FrontendDeveloperTests.java
 	java --module-path $(PATH_TO_FX) --add-modules javafx.controls --add-exports javafx.graphics/com.sun.javafx.application=ALL-UNNAMED -jar lib/junit5.jar -cp .:lib/JavaFXTester.jar -c FrontendDeveloperTests
 
