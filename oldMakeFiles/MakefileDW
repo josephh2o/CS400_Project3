@@ -11,7 +11,7 @@ AirportDatabaseDW.class: AirportDatabaseDW.java
 
 AirportDatabaseDW.java:
 	javac AirportDW.java
-	javac PathDW.java
+	javac Path.java
 
 clean:
 	rm *.class

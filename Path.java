@@ -1,7 +1,7 @@
 /**
  * Path class stores path data, which includes the start airport, end airport, and distance between them.
  */
-public class PathDW implements PathInterface {
+public class Path implements PathInterface {
 
     private String start; // 3-letter code of start airport
     private String end; // 3-letter code of end airport
@@ -13,7 +13,7 @@ public class PathDW implements PathInterface {
      * @param end 3-letter code of end airport
      * @param distance Distance between start and end airports in kilometers
      */
-    public PathDW(String start, String end, int distance) {
+    public Path(String start, String end, int distance) {
         this.start = start;
         this.end = end;
         this.distance = distance;

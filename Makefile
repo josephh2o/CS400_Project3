@@ -20,15 +20,14 @@ AirportPathFinderAppFD.class: AirportPathFinderAppFD.java AirportPath.class Airp
 AirportPathFinderFrontendFD.class: AirportPathInterface.class AirportPath.class AirportPathFinderFrontendInterface.class AirportPathFinderFrontendFD.java
 	javac --module-path $(PATH_TO_FX) --add-modules javafx.controls AirportPathFinderFrontendFD.java
 
-
-AirportPath.class : PathInterface.class AirportInterface.class PathDW.class Airport.class  AirportPathInterface.class AirportPath.java AirportDatabase.class AirportPathGraph.class
+AirportPath.class : PathInterface.class AirportInterface.class Path.class Airport.class  AirportPathInterface.class AirportPath.java AirportDatabase.class AirportPathGraph.class
 	javac AirportPath.java
 
 AirportDatabase.class: AirportDatabase.java
 	javac AirportDatabase.java
 
-PathDW.class : PathInterface.class PathDW.java
-	javac PathDW.java
+Path.class : PathInterface.class Path.java
+	javac Path.java
 
 Airport.class : AirportInterface.class Airport.java
 	javac Airport.java
@@ -64,7 +63,7 @@ runDataWranglerTests: #DataWranglerTests.class
 # DataWranglerTests.class: DataWranglerTests.java
 	# javac -cp .:lib/junit5.jar DataWranglerTests.java
 
-DataWranglerTests.java: AirportDatabaseDW.class
+DataWranglerTests.java: AirportDatabase.class
 
 runBackendDeveloperTests: #BackendDeveloperTests.class
 	javac --module-path $(PATH_TO_FX) --add-modules javafx.controls -cp .:lib/junit5.jar:./lib/JavaFXTester.jar BackendDeveloperTests.java
