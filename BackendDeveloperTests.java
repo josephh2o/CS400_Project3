@@ -15,8 +15,8 @@ public class BackendDeveloperTests extends JavaFXTester{
     
     public BackendDeveloperTests() {
         super(AirportPathFinderFrontendFD.class);
-        AirportPath ap = new AirportPath();
-        AirportPathFinderFrontendFD.setBackend(ap);
+        // AirportPath ap = new AirportPath();
+        // AirportPathFinderFrontendFD.setBackend(ap);
     }
     /*
      * Tests the constructor of the AirportPath class to make sure that the
