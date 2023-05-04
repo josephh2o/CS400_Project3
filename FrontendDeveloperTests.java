@@ -1,8 +1,11 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-
+import java.util.NoSuchElementException;
 import javafx.scene.text.Text;
+import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
 import edu.wisc.cs.cs400.JavaFXTester;
 
@@ -17,12 +20,15 @@ public class FrontendDeveloperTests extends JavaFXTester {
     public FrontendDeveloperTests() {
         super(AirportPathFinderFrontendFD.class);
     }
+    
+    
 
     /**
      * Checks app state transitions: from MAIN to different modes, and back to MAIN
      */
     @Test
     public void test1() {
+      
       Text prompt = lookup("#prompt").query();
         // make sure it starts in MAIN state
       assertEquals("Please choose an action", prompt.getText());
@@ -51,17 +57,17 @@ public class FrontendDeveloperTests extends JavaFXTester {
      * Tests a user-created route between two adjacent airports (using the select 2 airports method)
      */
     @Test
-    public void test2() {
+    public void test2() {      
       Text userRouteText = lookup("#userRouteText").query();
-      
+
       clickOn("#choose2");
       
-      clickOn("#LAX");
+      clickOn("#ORD");
       clickOn("#confirm");
-      clickOn("#MKE");
+      clickOn("#SFO");
       clickOn("#confirm");
          
-      assertEquals("Route: LAX->MKE\nTotal Distance: 10 km", userRouteText.getText()); 
+      assertEquals("Route: ORD->SFO\nTotal Distance: 2971 km", userRouteText.getText()); 
       clickOn("#back");
     }
     
@@ -74,23 +80,23 @@ public class FrontendDeveloperTests extends JavaFXTester {
     public void test3() {
       Text userRouteText = lookup("#userRouteText").query();
       Text prompt = lookup("#prompt").query();
-      
+
       clickOn("#choose3");
       assertEquals("Please select an airport", prompt.getText());
       
-      clickOn("#LAX");
+      clickOn("#DEN");
       clickOn("#confirm");
       assertEquals("Please select another airport", prompt.getText());
       
-      clickOn("#MKE");
+      clickOn("#DFW");
       clickOn("#confirm");
       assertEquals("Please select a final airport", prompt.getText());
       
-      clickOn("#EWR");
+      clickOn("#JFK");
       clickOn("#confirm");
       
       assertEquals("Please choose an action", prompt.getText());   
-      assertEquals("Route: LAX->MKE->ORF->EWR\nTotal Distance: 17 km", userRouteText.getText());
+      assertEquals("Route: DEN->DFW->JFK\nTotal Distance: 3271 km", userRouteText.getText());
       clickOn("#back");
     }
     
@@ -102,22 +108,22 @@ public class FrontendDeveloperTests extends JavaFXTester {
     public void test4() {
       Text userRouteText = lookup("#userRouteText").query();
       Text prompt = lookup("#prompt").query();
-      
+
       clickOn("#choose3");
       assertEquals("Please select an airport", prompt.getText());
       
-      clickOn("#LAX");
+      clickOn("#ORD");
       clickOn("#confirm");
       assertEquals("Please select another airport", prompt.getText());
       
-      clickOn("#MKE");
+      clickOn("#MCO");
       clickOn("#confirm");
       assertEquals("Please select a final airport", prompt.getText());
       
       clickOn("#back");
       
       // then try to click on another airport -- should do nothing
-      clickOn("#HLN");
+      clickOn("#SLC");
       
       assertEquals("Please choose an action", prompt.getText());   
       assertEquals("", userRouteText.getText());
@@ -130,16 +136,16 @@ public class FrontendDeveloperTests extends JavaFXTester {
      */
     @Test
     public void test5() {
-Text userRouteText = lookup("#userRouteText").query();
-      
+      Text userRouteText = lookup("#userRouteText").query();
+
       clickOn("#choose2");
       
-      clickOn("#MKE");
+      clickOn("#DEN");
       clickOn("#confirm");
-      clickOn("#HLN");
+      clickOn("#DFW");
       clickOn("#confirm");
          
-      assertEquals("Route: MKE->HLN\nTotal Distance: 3 km", userRouteText.getText()); 
+      assertEquals("Route: DEN->DFW\nTotal Distance: 1032 km", userRouteText.getText()); 
       // now clear map
       clickOn("#back");
       assertEquals("", userRouteText.getText());
@@ -154,24 +160,74 @@ Text userRouteText = lookup("#userRouteText").query();
     @Test
     public void test6() {
       Text userRouteText = lookup("#userRouteText").query();
-      
       clickOn("#choose2");
-      clickOn("#MKE");
-      clickOn("#confirm");
-      clickOn("#HLN");
-      clickOn("#confirm");
-      assertEquals("Route: MKE->HLN\nTotal Distance: 3 km", userRouteText.getText());
       
-      // now do a new route
-      clickOn("#choose3");
-      clickOn("#LAX");
+      clickOn("#DEN");
       clickOn("#confirm");
       clickOn("#DFW");
       clickOn("#confirm");
-      clickOn("#ORF");
+         
+      assertEquals("Route: DEN->DFW\nTotal Distance: 1032 km", userRouteText.getText()); 
+      
+      // now do a new route
+      clickOn("#choose3");
+      clickOn("#SFO");
       clickOn("#confirm");
-      assertEquals("Route: LAX->DFW->ORF\nTotal Distance: 12 km", userRouteText.getText());
+      clickOn("#DFW");
+      clickOn("#confirm");
+      clickOn("#ORD");
+      clickOn("#confirm");
+      assertEquals("Route: DFW->ORD->SFO\nTotal Distance: 4261 km", userRouteText.getText());
       clickOn("#back");
     }
+    
+    /**
+     * Tests case if Djikstra's algorithm fails and throws NoSuchElementException;
+     * Backend should propagate the exception
+     */
+    @Test
+    public void test1CodeReviewOfBackendDeveloper() {
+      AirportPath backend = new AirportPath();
+      
+      assertThrows(NoSuchElementException.class ,() -> backend.getShortestPath("ORD", "DFW") );
+      
+    }
+    
+    
+    @Test
+    public void test2CodeReviewOfBackendDeveloper() {
+      AirportPath backend = new AirportPath();
+      
+    }
+    
+    
+    /**
+     * Tests case where there is no directed route from selected starting/ending points
+     */
+    @Test
+    public void test1Integration() {
+      Text userRouteText = lookup("#userRouteText").query();
+      clickOn("#choose2");
+      
+      clickOn("#MCO");
+      clickOn("#confirm");
+      clickOn("#IAH");
+      clickOn("#confirm");
+         
+      assertEquals("No route found.", userRouteText.getText()); 
+      
+      clickOn("#back");
+    }
+    
+    
+    /**
+     * 
+     */
+    @Test
+    public void test2Integration() {
+
+    }
+    
+    
 
 }
