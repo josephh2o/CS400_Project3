@@ -50,14 +50,14 @@ AirportPathGraph.class: AirportPathGraph.java
 runTests: runAlgorithmEngineerTests runDataWranglerTests runBackendDeveloperTests runFrontendDeveloperTests
 
 runAlgorithmEngineerTests: #AlgorithmEngineerTests.class
-	javac -cp .:lib/junit5.jar AlgorithmEngineerTests.java
+	javac -cp .:./lib/junit5.jar AlgorithmEngineerTests.java
 	java -jar lib/junit5.jar -cp . --select-class=AlgorithmEngineerTests
 
 # AlgorithmEngineerTests.class: AlgorithmEngineerTests.java AirportPathGraph.class
 	# javac -cp .:lib/junit5.jar AlgorithmEngineerTests.java
 
 runDataWranglerTests: #DataWranglerTests.class
-	javac -cp .:lib/junit5.jar DataWranglerTests.java
+	javac -cp .:./lib/junit5.jar DataWranglerTests.java
 	java -jar lib/junit5.jar -cp . --select-class=DataWranglerTests
 
 # DataWranglerTests.class: DataWranglerTests.java
@@ -66,7 +66,7 @@ runDataWranglerTests: #DataWranglerTests.class
 DataWranglerTests.java: AirportDatabase.class
 
 runBackendDeveloperTests: #BackendDeveloperTests.class
-	javac --module-path $(PATH_TO_FX) --add-modules javafx.controls -cp .:lib/junit5.jar:./lib/JavaFXTester.jar BackendDeveloperTests.java
+	javac --module-path $(PATH_TO_FX) --add-modules javafx.controls -cp .:./lib/junit5.jar:./lib/JavaFXTester.jar BackendDeveloperTests.java
 	java --module-path $(PATH_TO_FX) --add-modules javafx.controls --add-exports javafx.graphics/com.sun.javafx.application=ALL-UNNAMED -jar lib/junit5.jar -cp .:lib/JavaFXTester.jar --select-class=BackendDeveloperTests
 
 runFrontendDeveloperTests: #FrontendDeveloperTests.class
