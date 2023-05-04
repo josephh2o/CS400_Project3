@@ -45,12 +45,11 @@ public class AirportPathFinderFrontendFD  extends Application
     private ArrayList<String> userAirportList; // ordinal list of airport codes created for user
     private HashMap<String, AirportCircle> airportLookup; // hashtable to convert codes to airports
     private HashMap<String,EdgeArrow> edges;    // hashtable to convert strings to edges 
-    
-    //private static AirportPathInterface static_backend = new AirportPathBDFD();
+   
     
 	public AirportPathFinderFrontendFD() {
 	  
-       //this.backend = static_backend;
+       this.backend = new AirportPath();
        userInterface = new UserInterface();
 
        userAirportList = new ArrayList<String>();
@@ -64,11 +63,6 @@ public class AirportPathFinderFrontendFD  extends Application
     }
     
 	
-//	public static void setBackend(AirportPathInterface newBackend) {
-//	  static_backend = newBackend;
-//	}
-	
-	
 	// calls drawMap(). Lets user do the following:
 			// 1) UI lets the user choose to find a route,
 			// 2) Three airport mode
@@ -81,16 +75,18 @@ public class AirportPathFinderFrontendFD  extends Application
 	@Override
 	public void start(final Stage stage) {
 	  
-	  StartupUI startup = new StartupUI();
-      startup.getYesButton().setId("yes");
-      startup.getNoButton().setId("no");
-	   
-	  startup.showAndWait();
-	  if ( startup.useTesterData() ) {
-	    backend = new AirportPathBDFD();
-	  } else {
-	    backend = new AirportPath();
-	  }
+//	  StartupUI startup = new StartupUI();
+//	  
+//      startup.getYesButton().setId("yes");
+//      startup.getNoButton().setId("no");
+//	  
+//	  startup.showAndWait();
+//	  if ( startup.useTesterData() ) {
+//	    backend = new AirportPathBDFD();
+//	  } else {
+//	    backend = new AirportPath();
+//	  }
+	  
 	  
 	  // set up call-backs for buttons
 	  userInterface.getBackButton().setOnAction(backToMenu -> backHelper() );      
